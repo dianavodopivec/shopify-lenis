@@ -1,0 +1,55 @@
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.23/bundled/lenis.min.js"></script>
+
+<style>
+html.lenis {
+height: auto;
+}
+.lenis.lenis-smooth {
+scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+overflow: hidden;
+}
+</style>
+
+<script>
+const $lenisDataStart = document.querySelectorAll("[data-lenis-start]")
+const $lenisDataStop = document.querySelectorAll("[data-lenis-stop]")
+const $lenisDataToggle = document.querySelectorAll("[data-lenis-toggle]")
+
+const lenis = new Lenis({
+lerp: 0.05,
+smoothWheel: true,
+wheelMultiplier: 1,
+}); 
+
+function raf(time) {
+lenis.raf(time);
+requestAnimationFrame(raf);
+} requestAnimationFrame(raf); 
+
+$lenisDataStart.forEach(e => {
+e.addEventListener("click", () => {
+lenis.start();
+});}); 
+
+$lenisDataStop.forEach(e => {
+e.addEventListener("click", () => {
+lenis.stop();
+});}); 
+
+$lenisDataToggle.forEach(el => {
+el.addEventListener("click", () => {
+this.classList.toggle("stop-scroll");
+
+if (this.classList.contains("stop-scroll")) {
+lenis.stop();
+} else {
+lenis.start();
+}
+});
+});
+</script>
